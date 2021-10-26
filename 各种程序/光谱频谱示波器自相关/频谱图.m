@@ -30,7 +30,7 @@ I1 = D(:, 2); %强度
 %————————出图—————————————————
 plot(W1,I1,'b','linewidth',1); 
 title([fileNames{i} '频谱'],'fontsize',18,'fontweight','bold','fontname','微软雅黑','Color','r');
-xlabel('Frequency (nm)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r'); 
+xlabel('Frequency (Hz)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r'); 
 ylabel('Intensity (dBm)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r');
  %————————存图————————————————
  mkdir csv_image;           %新建dat_image文件夹，如存在会警告，不影响程序
