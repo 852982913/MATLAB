@@ -50,8 +50,8 @@ for j = 1:length(fileNames) %加载数据，放入矩阵数组
     zong=(0+max(abs(i_fitnormal)))/2
     FWHM=1.763*a(2)%脉冲的3dB宽度
 % ----------------------图上细节-----------------
-    xlabel('Time Delay(fs)','fontname','Times New Roman','Fontsize',15,'fontweight','bold')
-    ylabel('Intensity(a.u.)','fontname','Times New Roman','fontsize',15,'FontWeight','bold');
+    xlabel('Time Delay(fs)','fontname','Times New Roman','Fontsize',15,'fontweight','bold','color','r')
+    ylabel('Intensity(a.u.)','fontname','Times New Roman','fontsize',15,'FontWeight','bold','color','r');
     set(gca,'linewidth',2)%坐标轴加粗
     legend('Exp.data','Sech.fitting');
     set(gca,'fontsize',13,'fontweight','bold','fontname','Times New Roman')
