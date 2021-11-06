@@ -2,7 +2,7 @@
 clear all;clc;close all
 format long
 
-path='C:\Users\wc852\Desktop\稳步锁模脉冲实验-hgq-20211014\原始数据\自相关1014\';
+path='D:\读研\实验数据\2021.11.05双频锁模实验-ggw\原始数据\自相关\';
 list = dir([path,'\*.csv']); %读取path路径下所有csv格式文件
 fileNames={list.name};      %将数据文件名添加到元胞数组
 disp(fileNames)             %显示变量 X 的值，而不打印变量名称
@@ -55,15 +55,15 @@ for j = 1:length(fileNames) %加载数据，放入矩阵数组
     set(gca,'linewidth',2)%坐标轴加粗
     legend('Exp.data','Sech.fitting');
     set(gca,'fontsize',13,'fontweight','bold','fontname','Times New Roman')
-    title('ACF-2021-Aug-27-12-58-48PM','fontname','Times New Roman','fontsize',15,'FontWeight','bold','color','r')
+    title([fileNames{j} '光谱'],'fontname','Times New Roman','fontsize',15,'FontWeight','bold','color','r')
     % str=abs(FWHM)
     txt=[num2str(abs(FWHM))]%图上标注
-    text(-9000,0.7,txt,'fontsize',25) 
+%     text(-9000,0.7,txt,'fontsize',25) 
     ylim([-0.1 1.1])
 % ------------------------存图---------------------------
     mkdir csv_image;           %新建dat_image文件夹，如存在会警告，不影响程序
     filepath=pwd;              %保存当前工作目录
-    cd('C:\Users\wc852\Desktop\稳步锁模脉冲实验-hgq-20211014\原始数据\自相关1014\csv_image');    %把当前工作目录切换到指定文件夹
+    cd('D:\读研\实验数据\2021.11.05双频锁模实验-ggw\原始数据\自相关\csv_image');    %把当前工作目录切换到指定文件夹
     f = getframe(gcf);
     imwrite(f.cdata,[fileNames{j} '自相关.png']);%将fileNames{i} 变量写入文件名
     cd(filepath); %返回工作目录
