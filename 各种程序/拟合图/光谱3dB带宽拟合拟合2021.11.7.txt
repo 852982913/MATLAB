@@ -2,18 +2,18 @@ close all
 clear all
 clc
 format long;
-%¡ª¡ª¡ª½«Êı¾İÎÄ¼şÃûÌí¼Óµ½Ôª°ûÊı×é£¬¶ÔÎÄ¼ş¼ĞÄÚËùÓĞ.csvÎÄ¼ş½øĞĞÊı¾İ´¦Àí¡ª¡ª
-path = 'C:\Users\wc852\Desktop\ĞÂ½¨ÎÄ¼ş¼Ğ';           %Ìí¼ÓÊı¾İÎÄ¼ş¼Ğ¾ø¶ÔÂ·¾¶,¹¤×÷Çø¼äÒªÔÚÍ¬Ò»¸öÅÌÄÚ
-list = dir([path,'\*.csv']); %¶ÁÈ¡pathÂ·¾¶ÏÂËùÓĞcsv¸ñÊ½ÎÄ¼ş
-fileNames={list.name};      %½«Êı¾İÎÄ¼şÃûÌí¼Óµ½Ôª°ûÊı×é
-disp(fileNames)             %ÏÔÊ¾±äÁ¿ X µÄÖµ£¬¶ø²»´òÓ¡±äÁ¿Ãû³Æ
-for i = 1:length(fileNames) %¼ÓÔØÊı¾İ£¬·ÅÈë¾ØÕóÊı×é
+%â€”â€”â€”å°†æ•°æ®æ–‡ä»¶åæ·»åŠ åˆ°å…ƒèƒæ•°ç»„ï¼Œå¯¹æ–‡ä»¶å¤¹å†…æ‰€æœ‰.csvæ–‡ä»¶è¿›è¡Œæ•°æ®å¤„ç†â€”â€”
+path = 'C:\Users\wc852\Desktop\æ–°å»ºæ–‡ä»¶å¤¹';           %æ·»åŠ æ•°æ®æ–‡ä»¶å¤¹ç»å¯¹è·¯å¾„,å·¥ä½œåŒºé—´è¦åœ¨åŒä¸€ä¸ªç›˜å†…
+list = dir([path,'\*.csv']); %è¯»å–pathè·¯å¾„ä¸‹æ‰€æœ‰csvæ ¼å¼æ–‡ä»¶
+fileNames={list.name};      %å°†æ•°æ®æ–‡ä»¶åæ·»åŠ åˆ°å…ƒèƒæ•°ç»„
+disp(fileNames)             %æ˜¾ç¤ºå˜é‡ X çš„å€¼ï¼Œè€Œä¸æ‰“å°å˜é‡åç§°
+for i = 1:length(fileNames) %åŠ è½½æ•°æ®ï¼Œæ”¾å…¥çŸ©é˜µæ•°ç»„
     disp(fileNames{i})
     exist(fileNames{i}', 'file')
-    trace =csvread(fileNames{i},46); %ĞŞ¸ÄÊıÖµ´Ó²»Í¬ĞĞ¿ªÊ¼¶ÁÈ¡
-% ----------------- ÄâºÏ»­Í¼ --------------------
+    trace =csvread(fileNames{i},46); %ä¿®æ”¹æ•°å€¼ä»ä¸åŒè¡Œå¼€å§‹è¯»å–
+% ----------------- æ‹Ÿåˆç”»å›¾ --------------------
     plot(trace(:,1),trace(:,2));hold on;
-    plot(trace(:,1),max(trace(:,2))-3,'.','color','r','MarkerSize',5);%·åÖµºìµã
+    plot(trace(:,1),max(trace(:,2))-3,'.','color','r','MarkerSize',5);%å³°å€¼çº¢ç‚¹
     col_daikuan=find(trace(:,2) > max(trace(:,2))-3);
     plot(trace(col_daikuan,1),trace(col_daikuan,2),'color','g');
     temh=trace(col_daikuan,1);
@@ -21,20 +21,20 @@ for i = 1:length(fileNames) %¼ÓÔØÊı¾İ£¬·ÅÈë¾ØÕóÊı×é
     line([temh(1) temh(1)],[temz(end) temz(end)-10],'Color','red','LineStyle','--');
     line([temh(end) temh(end)],[temz(end) temz(end)-10],'Color','red','LineStyle','--');
     line([temh(1) temh(end)],[temz(end)-10 temz(end)-10],'Color','red','LineStyle','--');
-    txt_3db=[num2str(temh(end) - temh(1)),' nm'];%Í¼ÉÏ±ê×¢
+    txt_3db=[num2str(temh(end) - temh(1)),' nm'];%å›¾ä¸Šæ ‡æ³¨
     temha=(temh(1) + temh(end))/2
     text(temha,temz(end)-12,txt_3db,'fontsize',10);
-% --------------- µ÷ÕûÍ¼¸üÃÀ¹Û ------------------
-    xlabel('Wavelength (nm)','fontname','Î¢ÈíÑÅºÚ','fontsize',14,'FontWeight','bold','Color','r')
-    ylabel('Spectral intensity (dB)','fontname','Î¢ÈíÑÅºÚ','fontsize',14,'FontWeight','bold','Color','r')
-    title([fileNames{i} '¹âÆ×ÄâºÏ'],'fontname','Î¢ÈíÑÅºÚ','fontsize',14,'FontWeight','bold','Color','r') 
-% ------------------------´æÍ¼------------------------
-     mkdir csv_image;           %ĞÂ½¨dat_imageÎÄ¼ş¼Ğ£¬Èç´æÔÚ»á¾¯¸æ£¬²»Ó°Ïì³ÌĞò
-     filepath=pwd;              %±£´æµ±Ç°¹¤×÷Ä¿Â¼
-     cd('C:\Users\wc852\Desktop\ĞÂ½¨ÎÄ¼ş¼Ğ\csv_image');    %°Ñµ±Ç°¹¤×÷Ä¿Â¼ÇĞ»»µ½Ö¸¶¨ÎÄ¼ş¼Ğ
+% --------------- è°ƒæ•´å›¾æ›´ç¾è§‚ ------------------
+    xlabel('Wavelength (nm)','fontname','å¾®è½¯é›…é»‘','fontsize',14,'FontWeight','bold','Color','r')
+    ylabel('Spectral intensity (dBm)','fontname','å¾®è½¯é›…é»‘','fontsize',14,'FontWeight','bold','Color','r')
+    title([fileNames{i} 'å…‰è°±æ‹Ÿåˆ'],'fontname','å¾®è½¯é›…é»‘','fontsize',14,'FontWeight','bold','Color','r') 
+% ------------------------å­˜å›¾------------------------
+     mkdir csv_image;           %æ–°å»ºdat_imageæ–‡ä»¶å¤¹ï¼Œå¦‚å­˜åœ¨ä¼šè­¦å‘Šï¼Œä¸å½±å“ç¨‹åº
+     filepath=pwd;              %ä¿å­˜å½“å‰å·¥ä½œç›®å½•
+     cd('C:\Users\wc852\Desktop\æ–°å»ºæ–‡ä»¶å¤¹\csv_image');    %æŠŠå½“å‰å·¥ä½œç›®å½•åˆ‡æ¢åˆ°æŒ‡å®šæ–‡ä»¶å¤¹
      f = getframe(gcf);
-    imwrite(f.cdata,[fileNames{i} '¹âÆ×ÄâºÏ.png']);%½«fileNames{i} ±äÁ¿Ğ´ÈëÎÄ¼şÃû
-     cd(filepath); %·µ»Ø¹¤×÷Ä¿Â¼
+    imwrite(f.cdata,[fileNames{i} 'å…‰è°±æ‹Ÿåˆ.png']);%å°†fileNames{i} å˜é‡å†™å…¥æ–‡ä»¶å
+     cd(filepath); %è¿”å›å·¥ä½œç›®å½•
      hold off;
 end
 
