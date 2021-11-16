@@ -1,27 +1,26 @@
 clear all;clc;format long;
-xita=pi/4; % pi/6,pi/12   ÈıÌõÇúÏß·Ö±ğÈ¡45¡ã30¡ã15¡ã
+theta=pi/2; % pi/6,pi/12   ä¸‰æ¡æ›²çº¿åˆ†åˆ«å–45Â°30Â°15Â°
 
-ex=300+3000i;ey=50+5000i; % ¶¨Òåex£¬ey
-faipc=2*pi; %¶¨Òå¦Õpc
-wl=1548:0.01:1552; %¶¨Òå²¨³¤
+Ex=1;Ey=0.5; % å®šä¹‰exï¼Œey
+phipc=0.15*pi; %å®šä¹‰Ï†pc
+wl=1545:0.01:1580; %å®šä¹‰æ³¢é•¿
 
-n=0.0004;L=0.25
-fail=2*pi./wl*n*L;   %¶¨Òå¦ÕL
+deltan=0.0004;L=0.23;
+phil=2*pi./wl*deltan*L;   %å®šä¹‰Ï†L
 
-% ====================Í¸¹ıÂÊ¹«Ê½=====================
-p1=ey*sin(xita);
-p2=ex*cos(xita)*exp(j*fail);
-p3=ey;
-p4=ex*sin(xita);
-p5=ey*cos(xita)*exp(-j*(fail+faipc))
+% ====================é€è¿‡ç‡å…¬å¼=====================
+p1=Ey*sin(theta);
+p2=Ex*cos(theta)*exp(i*phil);
+p3=-Ex*sin(theta);
+p4=Ey*cos(theta)*exp(-i*(phil+phipc));
 
-fenzi=(abs(p1+p2+p3-p4+p5)).^2;
-fenmu=abs(ex).^2+abs(ey).^2;
-T=fenzi/fenmu;
+numerator=sqrt((abs(p1+p2+p3+p4)).^2);
+denumerator=abs(Ex).^2+abs(Ey).^2;
+T=numerator/denumerator;
 
-% =================»­Í¼================
+% =================ç”»å›¾================
 plot(wl,T);hold on;
 xlabel('Wavelength (nm)','fontname','Times New Roman','fontsize',20,'FontWeight','bold'); 
-ylabel('Transmission (dB)','fontname','Times New Roman','fontsize',20,'FontWeight','bold');
+ylabel('Transmission (%)','fontname','Times New Roman','fontsize',20,'FontWeight','bold');
 
 
