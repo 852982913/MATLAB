@@ -2,7 +2,7 @@ close all
 clear all
 clc
 %———将数据文件名添加到元胞数组，对文件夹内所有.csv文件进行数据处理——
-path = 'C:\Users\酒仙桥科研巨擘专用\Desktop\8.24';           %添加数据文件夹绝对路径,工作区间要在同一个盘内
+path = 'D:\读研\实验数据\灌水论文\2021.12.21单波长出来两个\频谱';           %添加数据文件夹绝对路径,工作区间要在同一个盘内
 list = dir([path,'\*.csv']); %读取path路径下所有csv格式文件
 fileNames={list.name};      %将数据文件名添加到元胞数组
 disp(fileNames)             %显示变量 X 的值，而不打印变量名称
@@ -37,17 +37,20 @@ heng=D(raw,1);
 zong=b;
 fengzhi(i,1)=heng;
 plot(heng,zong,'.','color','r','MarkerSize',20);
-title([fileNames{i} '光谱'],'fontsize',18,'fontweight','bold','fontname','微软雅黑','Color','r');
-xlabel('Wavelength(nm)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r'); 
+heng_tem=heng/1000000;
+txt=[' f = ',num2str(heng_tem),'MHz']%图上标注
+text(heng,zong,txt)
+title([fileNames{i} '频谱'],'fontsize',18,'fontweight','bold','fontname','微软雅黑','Color','r');
+xlabel('frequency(Hz)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r'); 
 ylabel('Intensity(dBm)','fontname','微软雅黑','fontsize',14,'FontWeight','bold','Color','r');
 hold off
  %————————存图————————————————
-%  mkdir csv_image;           %新建dat_image文件夹，如存在会警告，不影响程序
-%  filepath=pwd;              %保存当前工作目录
-%  cd('C:\Users\酒仙桥科研巨擘专用\Desktop\新建文件夹');    %把当前工作目录切换到指定文件夹
-%  f = getframe(gcf);
-% imwrite(f.cdata,[fileNames{i} '光谱2.png']);%将fileNames{i} 变量写入文件名
-%  cd(filepath); %返回工作目录
+ mkdir csv_image;           %新建dat_image文件夹，如存在会警告，不影响程序
+ filepath=pwd;              %保存当前工作目录
+ cd('D:\读研\实验数据\灌水论文\2021.12.21单波长出来两个\频谱\csv_image\');    %把当前工作目录切换到指定文件夹
+ f = getframe(gcf);
+imwrite(f.cdata,[fileNames{i} '频谱.png']);%将fileNames{i} 变量写入文件名
+ cd(filepath); %返回工作目录
 
 end;%.csv文件处理for循环尾
 close; %关闭所有图表
