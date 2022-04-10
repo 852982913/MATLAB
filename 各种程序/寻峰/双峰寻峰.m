@@ -8,7 +8,7 @@ disp(fileNames)             %显示变量 X 的值，而不打印变量名称
 for i = 1:length(fileNames) %加载数据，放入矩阵数组
     disp(fileNames{i})
     exist(fileNames{i}', 'file')
-    data_in =csvread(fileNames{i},1); %修改数值从不同行开始读取
+    data_in =csvread(fileNames{i},46); %修改数值从不同行开始读取
  %———判断前k行属于无用数据———————————
 %      reference = data_in(:, 1); %加载第2列数据，寻找标志位，记录标志位行数k
 %      for k = 1:length(reference)
@@ -43,6 +43,7 @@ a2=findpeaks(D2(:,2));
 b2=max(a2);
 [raw2,col2]=find(D2==b2);
 heng2=D2(raw2,1);
+heng2=heng2(1);
 zong2=b2;
 plot(heng2,zong2,'.','color','r','MarkerSize',20);%峰值红点
 v1=heng1/1000000;
@@ -76,7 +77,7 @@ fengzhi(i,3)=str;
  %————————存图————————————————
  mkdir csv_image;           %新建dat_image文件夹，如存在会警告，不影响程序
  filepath=pwd;              %保存当前工作目录
- cd('C:\Users\酒仙桥科研巨擘专用\Desktop\1-369\8.19');    %把当前工作目录切换到指定文件夹
+ cd('C:\Users\酒仙桥科研巨擘专用\Desktop\1-369\csv_image');    %把当前工作目录切换到指定文件夹
  f = getframe(gcf);
 imwrite(f.cdata,[fileNames{i} '频谱.png']);%将fileNames{i} 变量写入文件名
  cd(filepath); %返回工作目录
@@ -85,6 +86,3 @@ end;%.csv文件处理for循环尾
 Mean=mean(fengzhi(:,3));% 均值
 std_cha=std(fengzhi(:,3));% 标准差
 % close; %关闭所有图表
-
-
-
